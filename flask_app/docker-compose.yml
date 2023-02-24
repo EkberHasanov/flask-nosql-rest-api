@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  db:
+    image: mongo:4.4
+    restart: always
+    ports:
+      - "27017:27017"
+    container_name: db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 1234
+    volumes:
+      - mongo_data:/var/lib/mongodb/data/
+  
+  app:
+    build:
+      context: ./src/
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src/:/app
+    command: sh -c "gunicorn --bind 0.0.0.0:8080 wsgi:app"
+       
+
+volumes:
+  mongo_data:
+
