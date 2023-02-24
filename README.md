@@ -1,6 +1,7 @@
 ## Seperate tasks
 ### 1. Flask application using MongoDB and Factory design pattern to building simple Rest API.
 * python3 -m venv .venv
+* source .venv/bin/activate
 * cd flask_app
 * pip install -r src/requirements.txt
 * docker-compose up --build
